@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @need.organization %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @need.item %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @need.category %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @need.comment %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @need.enabled %>
+</p>
+
+<%= link_to 'Edit', edit_need_path(@need) %> |
+<%= link_to 'Back', needs_path %>

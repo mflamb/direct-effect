@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  item: MyString
+  category: MyString
+  comment: MyString
+  enabled: false
+
+two:
+  organization: two
+  item: MyString
+  category: MyString
+  comment: MyString
+  enabled: false
