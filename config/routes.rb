@@ -43,14 +43,14 @@ Rails.application.routes.draw do
     get 'admins/sign_in', to: 'admins/sessions#new'
     delete 'admins/sign_out', to: 'admins/sessions#destroy'
     root to: 'map#index'
-    # authenticated do
-    #   resources :organizations
-    #   root to: "organizations#index", as: "authenticated_admin_root"
-    # end
+    authenticated do
+      resources :organizations
+      root to: "organizations#index", as: "authenticated_admin_root"
+    end
 
-    # unauthenticated do
-    #   root to: "map#index", as: "unauthenticated_admin_root"
-    # end
+    unauthenticated do
+      root to: "map#index", as: "unauthenticated_admin_root"
+    end
   end
   
 
