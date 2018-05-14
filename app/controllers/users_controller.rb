@@ -10,6 +10,22 @@ class UsersController < ApplicationController
   def new
   end
 
+  def edit
+    @users = User.where(approved: false)
+  end
+
+  def approve_user
+    user = User.find(params[:id])
+    user.approved = true
+    if user.save
+      flash[:notice] = "User has been approved"
+    else
+      flash[:alert] = "User approval failure"
+    end
+    redirect_to authenticated_admin_root_path
+  end
+
+
   def create
     @user = User.new(user_params)
 
@@ -27,6 +43,6 @@ class UsersController < ApplicationController
   # Make params acccessible for account creation
 
   def user_params
-    params.require(:user).permit(:organization_id, :name, :email, :password)
+    params.require(:user).permit(:organization_id, :first_name, :last_name, :email, :password)
   end
 end
