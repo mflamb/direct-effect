@@ -5,11 +5,17 @@ class OrganizationsController < ApplicationController
   # GET /organizations.json
   def index
     @organizations = Organization.all
+
+    @users = User.all
   end
 
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    @organization = Organization.find(current_user.organization_id)
+
+    @needs = @organization.needs.order(:item)
+    # .includes(:category)
   end
 
   # GET /organizations/new
@@ -64,7 +70,10 @@ class OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find(params[:id])
+      # @user = current_user.organization_id
+      p current_user
+      p current_user.organization_id
+      @organization = Organization.find(current_user.organization_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
