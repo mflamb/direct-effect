@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :check_user_or_admin
+  before_action :check_user_or_admin, exclude: [:destroy]
+  
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   # GET /organizations
@@ -90,7 +91,7 @@ class OrganizationsController < ApplicationController
 
     def check_user_or_admin 
       if !current_user && !current_admin 
-        redirect_to unauthenticated_user_root_path, notice: 'Sorry, you must be logged in to view organization pages'
+        redirect_to unauthenticated_root_path, notice: 'Sorry, you must be logged in to view organization pages'
       end 
     end
 end
