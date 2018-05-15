@@ -19,6 +19,7 @@ class NeedsController < ApplicationController
 
   # GET /needs/1/edit
   def edit
+    @need = Need.find(params[:id])
   end
 
   # POST /needs
