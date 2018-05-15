@@ -14,6 +14,19 @@
     </tr>
   </thead>
 
+  <% if current_admin %>
+
+  <table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %>
+      <td><%= user.approved %>
+      <td><%= link_to "approve", approve_user_path(user.id), method: :put %>
+    </tr>
+  <% end %>
+  </table>
+  <% end %>
+
   <tbody>
     <% @organizations.each do |organization| %>
       <tr>
