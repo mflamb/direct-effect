@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :organizations
   resources :needs, only: [:edit, :update]
-  resources :users, only: [:edit, :destroy]
+  resources :users, only: [:show, :edit, :update, :destroy]
 
   devise_scope :user do
     get 'users/sign_up', to: 'users/registrations#new'
@@ -24,25 +24,33 @@ Rails.application.routes.draw do
         root to: "organizations#show", as: "authenticated_user_root"
       end 
   
-      unauthenticated do
-        root to: "map#index", as: "unauthenticated_user_root"
-      end
+      # unauthenticated do
+      #   root to: "map#index", as: "unauthenticated_user_root"
+      # end
     end
 
   devise_for :admins, path: "admins", :controllers => { 
-    :sessions => "admins/sessions", only: [:new, :destroy],
+    :sessions => "admins/sessions", only: [:new, :destroy]
     # :registrations => "admins/registrations",
     # :passwords => "admins/passwords",
     # :confirmations => "admins/confirmations" 
   }
 
   devise_scope :admin do
-    root to: "organizations#index", as: "admin_root"
+    # root to: "organizations#index", as: "admin_root"
     get 'admins/sign_in', to: 'admins/sessions#new'
     delete 'admins/sign_out', to: 'admins/sessions#destroy'
     get 'admins/organizations', to: 'organizations#index' 
     get 'admins/organizations/:id', to: 'organizations#show'
+    # get 'admins/users/:id', to: 'users#edit'
     put 'users/:id/approve' => 'users#approve_user', as: 'approve_user'
+      authenticated :admin do
+        root to: "organizations#index", as: "authenticated_admin_root"
+      end 
+
+      unauthenticated do
+        root to: "map#index", as: "unauthenticated_root"
+      end
     # root to: 'organizations#index', as: "authenticated_admin_root"
     ## COME BACK TO THIS, AFTER ADMIN AUTHENTICATION IS WORKING USE THESE ROOT PATHS BELOW
       # resources :organizations
