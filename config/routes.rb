@@ -9,14 +9,15 @@ Rails.application.routes.draw do
   }
 
   resources :organizations
-  resources :needs, only: [:new, :create]
+  resources :needs, only: [:new, :create, :edit, :update, :index, :destroy]
   resources :users, only: [:show, :edit, :update, :destroy]
 
   devise_scope :user do
     get 'users/sign_up', to: 'users/registrations#new'
     get 'users/sign_in', to: 'users/sessions#new'
     delete 'users/sign_out', to: 'users/sessions#destroy'
-    get 'organizations/:id', to: 'organizations#show' 
+    get 'organizations/:id', to: 'organizations#show'
+    get 'users/needs/index', to: 'needs#index'
       authenticated :user do
         resources :needs, only: [] do
           patch :enable
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     delete 'admins/sign_out', to: 'admins/sessions#destroy'
     get 'admins/organizations', to: 'organizations#index' 
     get 'admins/organizations/:id', to: 'organizations#show'
+    get 'admins/needs/index', to: 'needs#index'
     put 'users/:id/approve' => 'users#approve_user', as: 'approve_user'
       authenticated :admin do
         root to: "organizations#index", as: "authenticated_admin_root"

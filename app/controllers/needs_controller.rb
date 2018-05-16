@@ -4,7 +4,12 @@ class NeedsController < ApplicationController
   # GET /needs
   # GET /needs.json
   def index
-    @needs = Need.all
+    if current_admin
+      @needs = Need.all
+    elsif current_user
+      @organization = Organization.find(current_user.organization_id)
+      @needs = @organization.needs
+    end
   end
 
   # GET /needs/1
@@ -15,6 +20,9 @@ class NeedsController < ApplicationController
   # GET /needs/new
   def new
     @need = Need.new
+    if current_user
+      @need.organization_id = current_user.organization_id
+    end
   end
 
   # GET /needs/1/edit
@@ -29,7 +37,7 @@ class NeedsController < ApplicationController
 
     respond_to do |format|
       if @need.save
-        format.html { redirect_to @need, notice: 'Need was successfully created.' }
+        format.html { redirect_to needs_path, notice: 'Need was successfully created.' }
         format.json { render :show, status: :created, location: @need }
       else
         format.html { render :new }
@@ -57,9 +65,10 @@ class NeedsController < ApplicationController
   # PATCH/PUT /needs/1
   # PATCH/PUT /needs/1.json
   def update
+    @need = Need.find(params[:id])
     respond_to do |format|
       if @need.update(need_params)
-        format.html { redirect_to @need, notice: 'Need was successfully updated.' }
+        format.html { redirect_to needs_path, notice: 'Need was successfully updated.' }
         format.json { render :show, status: :ok, location: @need }
       else
         format.html { render :edit }
@@ -71,9 +80,10 @@ class NeedsController < ApplicationController
   # DELETE /needs/1
   # DELETE /needs/1.json
   def destroy
+    @need = Need.find(params[:id])
     @need.destroy
     respond_to do |format|
-      format.html { redirect_to needs_url, notice: 'Need was successfully destroyed.' }
+      format.html { redirect_to needs_path, notice: 'Need was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -81,7 +91,12 @@ class NeedsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_need
-      @need = Need.find(params[:id])
+      if current_user
+        @organization = Organization.find(current_user.organization_id)
+        @needs = @organization.needs
+      elsif current_admin
+        @needs = Need.all
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

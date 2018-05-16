@@ -11,24 +11,25 @@
     </div>
   <% end %>
 
+  
   <div class="field">
-    <%= form.label :organization_id %>
-    <%= form.text_field :organization_id %>
+    <%= form.label :organization_id, style: "#{'display:none' if current_user}" %>
+    <%= form.text_field :organization_id, class: 'form-control', style: "#{'display:none' if current_user}" %>
   </div>
 
   <div class="field">
     <%= form.label :item %>
-    <%= form.text_field :item %>
+    <%= form.text_field :item, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.text_field :category %>
+    <%= form.text_field :category, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :comment %>
-    <%= form.text_field :comment %>
+    <%= form.text_field :comment, class: 'form-control' %>
   </div>
 
   <div class="field">
@@ -37,6 +38,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save", class: 'btn btn-primary' %>
   </div>
 <% end %>
