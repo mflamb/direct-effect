@@ -36,10 +36,10 @@ redirect_to root_path
 | <%= link_to 'Delete Organization', @organization, method: :delete, data: { confirm: 'Are you sure you want to delete this organization?' } %>
 <% end %>
 
-<ul>
+<ul class="list-unstyled">
   <% @organization.needs.each do |need| %>
     <li>
-      <%= need.item %>
+      <%= render need %>
     </li>
   <% end %>
 </ul>

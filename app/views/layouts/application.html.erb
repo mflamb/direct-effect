@@ -10,53 +10,59 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
-        <nav>
-      <div>
-        <ul>
-          <li>
-            <%= link_to 'Home', authenticated_user_root_path, class: 'nav-link' %>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+
+
+          <li class="navbar-item">
+           <%= link_to 'Map', unauthenticated_root_path, class: 'nav-link' %>
           </li>
-        </ul>
-        <ul>
-          <li>
-            <%= link_to 'Create User Account', users_sign_up_path, class: 'nav-link' %>
+
+          <li class="navbar-item">
+            <%= link_to 'Create Account', users_sign_up_path, class: 'nav-link' %>
           </li>
+
           <% if current_user %>
-            <li>
-              <%= link_to 'User Log Out', users_sign_out_path, method: 'delete', class: 'nav-link' %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to 'User Login', users_sign_in_path, class: 'nav-link' %>
-            </li>
-        </ul>
-        <% end %>
+
+          <li class="navbar-item">
+           <%= link_to 'Home', authenticated_user_root_path, class: 'nav-link' %>
+          </li>
+
+          <li class="navbar-item">
+            <%= link_to 'User Log Out', users_sign_out_path, method: 'delete', class: 'nav-link' %>
+          </li>
+
+
+
+          <% elsif !current_admin %>
+          <li class="navbar-item">
+            <%= link_to 'User Login', users_sign_in_path, class: 'nav-link' %>
+          </li>
+          <% end %>
 
           <% if current_admin %>
-          <ul>
-            <li>
-              <%= link_to 'Admins Home', admins_organizations_path, class: 'nav-link' %>
-            </li>
-          </ul>
+          <li class="navbar-item">
+            <%= link_to 'Admins Home', authenticated_admin_root_path, class: 'nav-link' %>
+          </li>
           
-          <ul>
-            <li>
-              <%= link_to 'Admin Log Out', admins_sign_out_path, method: 'delete', class: 'nav-link' %>
-            </li>
+          <li class="navbar-item">
+            <%= link_to 'Admin Log Out', admins_sign_out_path, method: 'delete', class: 'nav-link' %>
+          </li>
+          
+          <% elsif !current_user %>
+          <li class="navbar-item">
+            <%= link_to 'Admin Login', admins_sign_in_path, class: 'nav-link' %>
+          </li>
+          <% end %>
           </ul>
-          <% else %>
-          <ul>
-            <li>
-              <%= link_to 'Admin Login', admins_sign_in_path, class: 'nav-link' %>
-            </li>
-          </ul>
-          <ul>    
-        <% end %>
-      </div>
-    </nav> 
+        </div>
+      </nav> 
+        
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
