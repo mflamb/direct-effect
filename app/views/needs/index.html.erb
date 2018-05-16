@@ -1,11 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Needs</h1>
+<% if current_user %>
+<h1><%= @organization.name %> Needs</h1>
+<% else %>
+<h1>Needs by Organization</h1>
+<% end %>
+
 
 <table>
   <thead>
     <tr>
+      <% if !current_user %>
       <th>Organization</th>
+      <% else %>
+      <% end %>
       <th>Item</th>
       <th>Category</th>
       <th>Comment</th>
@@ -17,13 +25,15 @@
   <tbody>
     <% @needs.each do |need| %>
       <tr>
-        <td><%= need.organization %></td>
+        <% if !current_user %>
+        <td><%= need.organization.name %></td>
+        <% else %>
+        <% end %>
         <td><%= need.item %></td>
         <td><%= need.category %></td>
         <td><%= need.comment %></td>
         <td><%= need.enabled %></td>
-        <td><%= link_to 'Show', need %></td>
-        <td><%= link_to 'Edit', edit_need_path(need) %></td>
+        <td><%= link_to 'Edit', edit_need_path(need) %> |</td> 
         <td><%= link_to 'Destroy', need, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

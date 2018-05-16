@@ -4,3 +4,6 @@
 
 <%= link_to 'Show', @organization %> |
 <%= link_to 'Back', organizations_path %>
+<% if current_user || current_admin %>
+| <%= link_to 'Add or Edit Needs', needs_path %>
+<% end %>
