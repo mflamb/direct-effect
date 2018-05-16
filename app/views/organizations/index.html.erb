@@ -2,7 +2,7 @@
 
 <h1>Organizations</h1>
 
-<table>
+<%# <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -12,23 +12,25 @@
       <th>Phone</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+  </thead> %>
 
   <% if current_admin %>
-
+  <h3>Registered Users</h3>
   <table>
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.email %>
-      <td><%= user.approved %>
-      <td><%= link_to "approve", approve_user_path(user.id), method: :put %>
+      <td><strong>Name: </strong><%= user.first_name %> <%= user.last_name %></td>
+      <td><strong>Email: </strong><%= user.email %></td>
+      <td><strong>Approved: </strong><%= user.approved %></td>
+      <td><%= link_to "approve", approve_user_path(user.id), method: :put %> </td>
     </tr>
   <% end %>
-  </table>
+  </table><br>
   <% end %>
 
   <tbody>
     <% @organizations.each do |organization| %>
+    <div>
       <tr>
         <td><%= organization.name %></td>
         <td><%= organization.description %></td>
@@ -40,6 +42,7 @@
         <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
         <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+    </div><br>
     <% end %>
     <% end %>
   </tbody>

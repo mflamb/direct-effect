@@ -38,6 +38,22 @@ class NeedsController < ApplicationController
     end
   end
 
+  def enable 
+    @need = Need.find(params[:need_id])
+
+    @need.update!(enabled: true)
+
+    render 'replace_button'
+  end 
+
+  def disable
+    @need = Need.find(params[:need_id])
+
+    @need.update!(enabled: false)
+
+    render 'replace_button'
+  end
+
   # PATCH/PUT /needs/1
   # PATCH/PUT /needs/1.json
   def update
