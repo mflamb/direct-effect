@@ -3,7 +3,7 @@
 class Admins::SessionsController < Devise::SessionsController
   include Accessible
   skip_before_action :check_user
-  # before_action :configure_sign_in_params, only: [:create]
+  # before_action :configure_sign_in_params, only: [:new]
 
   # GET /resource/sign_in
   def new

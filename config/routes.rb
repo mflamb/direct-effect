@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
 
   devise_for :admins, path: "admins", :controllers => { 
-    :sessions => "admins/sessions", only: [:new, :destroy]
+    :sessions => "admins/sessions", only: [:new, :create, :destroy]
   }
 
   devise_scope :admin do
