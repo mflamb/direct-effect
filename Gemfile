@@ -5,6 +5,8 @@ ruby '2.4.1'
 
 gem 'rgeo-geojson'
 
+gem 'rgeo'
+
 gem 'mapbox-gl-rails'
 
 gem 'open-iconic-rails'
