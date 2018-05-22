@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     :passwords => "users/passwords",
     :confirmations => "users/confirmations" 
   }
-
-  resources :organizations
+  
+  # resources :map, only: [:show, :index]
+  resources :organizations 
   resources :needs, only: [:new, :create, :edit, :update, :index, :destroy]
   resources :users, only: [:show, :edit, :update, :destroy]
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     get 'organizations/:id', to: 'organizations#show'
     get 'users/needs/index', to: 'needs#index'
       authenticated :user do
-        resources :needs, only: [] do
+        resources :needs, only: [:edit, :update] do
           patch :enable
           patch :disable
         end
@@ -28,7 +29,8 @@ Rails.application.routes.draw do
     end
 
   devise_for :admins, path: "admins", :controllers => { 
-    :sessions => "admins/sessions", only: [:new, :create, :destroy]
+    :sessions => "admins/sessions", only: [:new, :create, :destroy],
+    # :registrations => "admins/registrations" ################################################
   }
 
   devise_scope :admin do
@@ -37,6 +39,7 @@ Rails.application.routes.draw do
     get 'admins/organizations', to: 'organizations#index' 
     get 'admins/organizations/:id', to: 'organizations#show'
     get 'admins/needs/index', to: 'needs#index'
+    # get 'admins/sign_up', to: 'admins/registrations#new'
     put 'users/:id/approve' => 'users#approve_user', as: 'approve_user'
       authenticated :admin do
         root to: "organizations#index", as: "authenticated_admin_root"
@@ -46,7 +49,4 @@ Rails.application.routes.draw do
         root to: "map#index", as: "unauthenticated_root"
       end
   end
-  
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
