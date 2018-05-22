@@ -1,3 +1,5 @@
+
+<div id="need-btn-<%= need.id %>" class="col-xs-12 col-md-6">
 <% if need.enabled? %>
   <% url = need_disable_path(need) %>
   <% style = 'success' %>
@@ -6,5 +8,13 @@
   <% style = 'secondary' %>
 <% end %>
 <%= button_to need.item, url, method: :patch, remote: true,
-  form: { id: "need-btn-#{need.id}" },
-  class: "btn btn-#{style} mt-2" %>
+  class: "btn btn-inline btn-#{style} mt-2" %>
+
+<% if need.enabled? %>
+  <%= link_to edit_need_path(need),
+    title: 'Add/edit comment',
+    class: 'edit-need-link' do %>
+    <%= open_iconic :icon, :wrench %>
+  <% end %>
+<% end %>
+</div>

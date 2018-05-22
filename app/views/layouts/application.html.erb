@@ -7,6 +7,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
   </head>
 
   <body>
@@ -21,9 +23,13 @@
            <%= link_to 'Map', unauthenticated_root_path, class: 'nav-link' %>
           </li>
 
+          <% if !current_user && !current_admin %>
+
           <li class="navbar-item">
             <%= link_to 'Create Account', users_sign_up_path, class: 'nav-link' %>
           </li>
+
+          <% end %>
 
           <% if current_user %>
 
@@ -62,6 +68,7 @@
       </nav> 
         
     <div class="container">
+    <p id="notice"><%= notice %></p>
     <%= yield %>
     </div>
   </body>

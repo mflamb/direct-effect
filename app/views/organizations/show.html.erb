@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
 
-<% if current_admin || current_user.organization_id == @organization.id %>
+
+<% if current_admin || current_user %>
 <p>
   <strong>Name:</strong>
   <%= @organization.name %>
@@ -36,10 +36,40 @@ redirect_to root_path
 | <%= link_to 'Delete Organization', @organization, method: :delete, data: { confirm: 'Are you sure you want to delete this organization?' } %>
 <% end %>
 
-<ul class="list-unstyled">
-  <% @organization.needs.each do |need| %>
-    <li>
-      <%= render need %>
-    </li>
-  <% end %>
-</ul>
+
+
+<h2 class="needs">Current Needs</h2>
+<div class="needs-list">
+  <% @categories.each do |category| %>
+    <h3 class="category"><%= category %></h3>
+    <div class="category">
+      <% Need.where(organization_id: @organization.id, category: category).each do |need| %>
+        <div id="need-btn-<%= need.id %>" class="col-xs-12 col-md-6">
+          <% if need.enabled? %>
+            <% url = need_disable_path(need) %>
+            <% style = 'success' %>
+          <% else %>
+            <% url = need_enable_path(need) %>
+            <% style = 'secondary' %>
+          <% end %>
+          <%= button_to need.item, url, method: :patch, remote: true,
+            class: "btn btn-inline btn-#{style} mt-2" %>
+
+          <% if need.enabled? %>
+            <%= link_to edit_need_path(need),
+              title: 'Add/edit comment',
+              class: 'edit-need-link' do %>
+              <%= open_iconic :icon, :wrench %>
+            <% end %>
+          <% end %>
+        </div>
+          <% unless need.comment.blank? %>
+            <div class="comment">
+              <%= need.comment %>
+            </div>
+          <% end %>  
+      <% end %>
+    </div>        
+  <% end%>
+
+</div>
