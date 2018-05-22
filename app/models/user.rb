@@ -20,8 +20,7 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super 
-    # && approved?
+    super && approved?
   end
 
   def inactive_message

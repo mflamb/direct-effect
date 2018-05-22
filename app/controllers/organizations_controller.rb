@@ -1,14 +1,24 @@
 class OrganizationsController < ApplicationController
-  before_action :check_user_or_admin, exclude: [:destroy]
+  before_action :check_user_or_admin, only: [:edit, :update]
   
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   # GET /organizations
   # GET /organizations.json
   def index
+    if current_user || current_admin
     @organizations = Organization.all
-
     @users = User.all
+    else
+      collection = RGeo::GeoJSON::FeatureCollection.new(
+        Organization.all.map do |org|
+          RGeo::GeoJSON::Feature.new(
+            RGeo::Cartesian.factory.point(org.long, org.lat), org.id, name: org.name, need_count: org.needs.where('enabled = true').count
+          )
+        end
+      )
+      render json: RGeo::GeoJSON.encode(collection)
+    end
   end
 
   # GET /organizations/1
@@ -16,13 +26,25 @@ class OrganizationsController < ApplicationController
   def show
     if current_user
       @organization = Organization.find(current_user.organization_id)
-      @needs = @organization.needs.order(:item)
-    elsif current_admin
-      @organization = Organization.find(params[:id])
-      @needs = @organization.needs.order(:item)
-    end
+      @needs = @organization.needs
+      @categories = []
 
-    # .includes(:category)
+      @needs.each do |need|
+        if !@categories.include? need.category
+          @categories.push(need.category)
+        end
+      end
+    else
+      @organization = Organization.find(params[:id])
+      @needs = @organization.needs
+      @categories = []
+
+      @needs.each do |need|
+        if !@categories.include? need.category
+          @categories.push(need.category)
+        end
+      end
+    end
   end
 
   # GET /organizations/new
