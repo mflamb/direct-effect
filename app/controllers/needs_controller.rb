@@ -101,6 +101,6 @@ class NeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def need_params
-      params.require(:need).permit(:organization_id, :item, :category, :comment, :enabled)
+      params.require(:need).permit(:organization_id, :item, :category, :comment)
     end
 end

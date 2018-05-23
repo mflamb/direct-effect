@@ -34,7 +34,7 @@ class OrganizationsController < ApplicationController
           @categories.push(need.category)
         end
       end
-    else
+    elsif current_admin
       @organization = Organization.find(params[:id])
       @needs = @organization.needs
       @categories = []
@@ -44,6 +44,17 @@ class OrganizationsController < ApplicationController
           @categories.push(need.category)
         end
       end
+    else 
+      @organization = Organization.find(params[:id])
+      @needs = @organization.needs.where('enabled = true').order(:item).includes(@category)
+      @categories = []
+
+      @needs.each do |need|
+        if !@categories.include? need.category
+          @categories.push(need.category)
+        end
+      end
+      render layout: false
     end
   end
 
