@@ -38,10 +38,8 @@ class NeedsController < ApplicationController
     respond_to do |format|
       if @need.save
         format.html { redirect_to needs_path, notice: 'Need was successfully created.' }
-        format.json { render :show, status: :created, location: @need }
       else
         format.html { render :new }
-        format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,10 +67,8 @@ class NeedsController < ApplicationController
     respond_to do |format|
       if @need.update(need_params)
         format.html { redirect_to needs_path, notice: 'Need was successfully updated.' }
-        format.json { render :show, status: :ok, location: @need }
       else
         format.html { render :edit }
-        format.json { render json: @need.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,7 +80,6 @@ class NeedsController < ApplicationController
     @need.destroy
     respond_to do |format|
       format.html { redirect_to needs_path, notice: 'Need was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

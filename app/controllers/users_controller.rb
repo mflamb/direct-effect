@@ -10,10 +10,12 @@ class UsersController < ApplicationController
   def new
   end
 
+  # Method to make users pending approval available to Admin
   def edit
     @users = User.where(approved: false)
   end
 
+  # Method for admins to change user approval status
   def approve_user
     user = User.find(params[:id])
     user.approved = true
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
     redirect_to authenticated_admin_root_path
   end
 
-
+  # User create method includes instructions for notifying Admin of a new User pending approval
   def create
     @user = User.new(user_params)
 

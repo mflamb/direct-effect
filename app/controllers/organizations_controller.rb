@@ -75,10 +75,8 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,10 +87,8 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -103,12 +99,12 @@ class OrganizationsController < ApplicationController
     @organization.destroy
     respond_to do |format|
       format.html { redirect_to organizations_url, notice: 'Organization was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    # Define who can see what based on user or admin
     def set_organization
       if current_user
         @organization = Organization.find(current_user.organization_id)
@@ -117,11 +113,12 @@ class OrganizationsController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Whitelist parameters
     def organization_params
       params.require(:organization).permit(:name, :description, :address, :poc_name, :phone)
     end
 
+    # Authentication method to protect Organization Edit/Delete functions
     def check_user_or_admin 
       if !current_user && !current_admin 
         redirect_to unauthenticated_root_path, notice: 'Sorry, you must be logged in to view organization pages'
