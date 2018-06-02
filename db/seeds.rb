@@ -2,6 +2,13 @@
 Need.destroy_all
 Organization.destroy_all
 
+Admin.create(
+  email: "testing@test.com",
+  password: "test",
+  first_name: "mike",
+  last_name: "lamb"
+)
+
 sarnelli = Organization.create(
     name: "Blessed Sarnelli Community",
     description: "Blessed Sarnelli Community is an organization dedicated to providing for the needs of people who are poor and abandoned with an emphasis on empowering young adults to share in this commitment through prayer, hospitality and service.",
@@ -127,3 +134,11 @@ sarnelli = Organization.create(
       category: category
       )
   end
+
+  # User.create(
+  #   email: "test@test.com", 
+  #   password: "test", 
+  #   first_name: "test", 
+  #   last_name: "test", 
+  #   organization_id: sarnelli.id, 
+  #   approved: true)
