@@ -2,12 +2,12 @@
 Need.destroy_all
 Organization.destroy_all
 
-Admin.create(
-  email: "testing@test.com",
-  password: "test",
-  first_name: "mike",
-  last_name: "lamb"
-)
+# Admin.create(
+#   email: "testing@test.com",
+#   password: "test",
+#   first_name: "mike",
+#   last_name: "lamb"
+# )
 
 sarnelli = Organization.create(
     name: "Blessed Sarnelli Community",
