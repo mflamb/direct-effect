@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'map#index'
+  # root 'map#index'
 
   devise_for :users, path: "users", :controllers => { 
     :sessions => "users/sessions", only: [:new, :destroy],
