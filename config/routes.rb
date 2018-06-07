@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     :confirmations => "users/confirmations" 
   }
   
-  # resources :map, only: [:show, :index]
   resources :organizations 
   resources :needs, only: [:new, :create, :edit, :update, :index, :destroy]
   resources :users, only: [:show, :edit, :update, :destroy]
@@ -31,7 +30,6 @@ Rails.application.routes.draw do
 
   devise_for :admins, path: "admins", :controllers => { 
     :sessions => "admins/sessions", only: [:new, :create, :destroy],
-    # :registrations => "admins/registrations" ################################################
   }
 
   devise_scope :admin do
@@ -40,7 +38,6 @@ Rails.application.routes.draw do
     get 'admins/organizations', to: 'organizations#index' 
     get 'admins/organizations/:id', to: 'organizations#show'
     get 'admins/needs/index', to: 'needs#index'
-    # get 'admins/sign_up', to: 'admins/registrations#new'
     put 'users/:id/approve' => 'users#approve_user', as: 'approve_user'
       authenticated :admin do
         root to: "organizations#index", as: "authenticated_admin_root"
