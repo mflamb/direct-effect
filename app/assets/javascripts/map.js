@@ -3,8 +3,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWZsYW1ianIiLCJhIjoiY2poYW1oZzQ3MHAxbzNkcWdnc
 var map = new mapboxgl.Map({
   container: element_name,
   style: 'mapbox://styles/mapbox/streets-v10',
-  center: [-75.162398,39.957893],
-  zoom: 12
+  center: [-75.122518,39.989096],
+  zoom: 17
+//   [-75.162398,39.957893]
 });
 
 // Add zoom and rotation controls to the map.
@@ -30,7 +31,8 @@ map.on('load', function () {
         "type": "symbol",
         "source": "organizations",
         "layout": {
-            "icon-image": "circle-15",
+            "icon-image": "star-15",
+            "icon-padding": 0,
             "icon-allow-overlap": true,
             "text-optional": true,
             "text-field": "{name}",
