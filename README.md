@@ -12,4 +12,4 @@ When I brought the idea for the My Brother's Keeper open source project to Code 
 
 * Use a map that shows more detail such as nearby Septa train stops.
 
-* Store Comments as a column on the Needs model instead of creating a Comments Model.
+* Store comments as a column on the Needs model instead of creating a Comments Model.
