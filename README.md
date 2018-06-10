@@ -2,6 +2,7 @@
 
 When I brought the idea for the My Brother's Keeper open source project to Code for Philly, I wanted to challenge myself to build the project on my own at the same time.  I thought this would be an awesome way learn and experiment with different design and architectural choices without risking cluttering up the repo for my teammates on the My Brother's Keeper project.
 
+
 ## Different Features of Direct Effect vs. My Brother's Keeper
 
 * Use the Devise gem to implement two User Models - "User" for Charity Organization Members who need to log in to use the app, and "Admin" for myself (i.e. any site administrator)
@@ -33,3 +34,4 @@ rvm install ruby-2.4.1
 ```
 
 Once you've cloned and set up this environment, `bundle install` will take care of your other gem dependencies.
+
