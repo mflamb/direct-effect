@@ -1,8 +1,9 @@
 
 
 <style>
-    body { position:absolute; left:0; right:0; top:0; bottom:0; margin:0; padding:0; }
+    body { position:absolute; left:0; right:0; top:0; bottom:0; margin:0; padding:0; background: #f7fafc; }
     .container { width:100vw; height:100vw; margin:0; padding:0; }
+    #welcome { margin-left: 1em; text-align: center; }
 </style>
 
 <div id='detail-view' style='left:-450px;'>
@@ -12,6 +13,12 @@
     </div>
     <div id='detail-content'></div>
 </div>
+<!-- start slipsum code -->
+<div id="welcome">
+<h3>Want to donate goods to charities, but unsure of what they need?</h3>
+<p>Click on the starred organizations on the map below to find out what items they currently need the most!</p>
+</div>
+<!-- end slipsum code -->
 <div id='map'></div>
 <script type='text/javascript'>
     var map = init_map('map');
