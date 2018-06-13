@@ -13,6 +13,11 @@ sarnelli = Organization.create(
     name: "Blessed Sarnelli Community",
     description: "Blessed Sarnelli Community is an organization dedicated to providing for the needs of people who are poor and abandoned with an emphasis on empowering young adults to share in this commitment through prayer, hospitality and service.",
     address: "2739 Kensington Ave, Philadelphia, PA 19134",
+    website: "bscphilly.org",
+    poc_name: "Kim Collins",
+    email: "kcollins@bscphilly.org",
+    phone: "571-314-3428",
+    dropoff_hours: "Please call to make appointment for dropoff",
     long: -75.123686,
     lat: 39.990711
   )
@@ -68,6 +73,9 @@ sarnelli = Organization.create(
     name: "Last Stop",
     description: "Last Stop is a no-frills sober living environment where homeless alcoholics and addicts can recover by learning to live a life of service from the example of others like them who are doing the same.  We serve the community every day by handing out clothing and meals to those who are still suffering in the heart of Kensington's drug trade",
     address: "1816 East Somerset St, Philadelphia, PA 19134",
+    poc_name: "Eddie Zampitella",
+    phone: "215-634-3564",
+    dropoff_hours: "Please call to make appointment for dropoff",
     long: -75.122393,
     lat: 39.991042
   )
@@ -105,6 +113,9 @@ sarnelli = Organization.create(
     name: "Rock Ministries",
     description: "A Bible, boxing gloves and five boys … that’s how Rock Ministries started. With its goal to reach at-risk, inner city youth with the Gospel of Jesus Christ, the Rock has now grown to serve over 5000 kids through sports, arts, music, recreation, mentoring and Bible studies.  Through our church, Calvary Chapel of Kensington, we also serve the community with outreaches, support for addicts and others in need, a food pantry, and most importantly the consistent teaching of the Word of God.",
     address: "2755 Kensington Ave, Philadelphia, PA 19134",
+    website: "therockphilly.org",
+    phone: "215-739-3927",
+    dropoff_hours: "Please call to make appointment for dropoff",
     long: -75.123262,
     lat: 39.990834
   )
