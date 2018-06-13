@@ -1,38 +1,47 @@
 
 
 
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
+<div class="description"><%= @organization.description %></div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @organization.description %>
-</p>
+<div class="detail address">
+  <%= link_to @address,
+    "https://www.google.com/maps/dir/?api=1&destination=#{@address.to_param}",
+    target: '_blank'
+  %>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @organization.address %>
-</p>
+<% unless @organization.website.blank? %>
+  <div class="detail website">
+    <%= link_to @organization.website.sub(/^https?\:\/\/(www.)?/, ''),
+      @organization.website,
+      target: '_blank' %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Point of Contact:</strong>
-  <%= @organization.poc_name %>
-</p>
+<% unless @organization.phone.blank? %>
+  <div class="detail phone">
+    <%= @organization.phone %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @organization.phone %>
-</p>
+<% unless @organization.email.blank? %>
+  <div class="detail email">
+    <%= @organization.email %>
+  </div>
+<% end %>
+
+<% unless @organization.dropoff_hours.blank? %>
+  <div class="detail hours">
+    <%= @organization.dropoff_hours %>
+  </div>
+<% end %>
 
 <% if current_admin || current_user %>
 
 <%= link_to 'Edit', edit_organization_path(@organization) %> |
-<% else %>
-<%# <% redirect_to unauthenticated_root_path %> 
-<% end %>
 <%= link_to 'Back', organizations_path %>
+<% else %>
+<% end %>
 <% if current_admin %>
 | <%= link_to 'Delete Organization', @organization, method: :delete, data: { confirm: 'Are you sure you want to delete this organization?' } %>
 <% end %>

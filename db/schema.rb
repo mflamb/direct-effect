@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_21_144306) do
+ActiveRecord::Schema.define(version: 2018_06_12_223437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 2018_05_21_144306) do
     t.datetime "updated_at", null: false
     t.decimal "long", precision: 10, scale: 6
     t.decimal "lat", precision: 10, scale: 6
+    t.string "email"
+    t.string "website"
+    t.string "dropoff_hours"
   end
 
   create_table "users", force: :cascade do |t|
