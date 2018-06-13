@@ -81,14 +81,55 @@
 
     .description {
         margin: 0;
-        padding: 20px;
+        padding: 15px;
         border-bottom: 1px solid #eee;
     }
 
-    .address {
+    .detail {
         margin: 0;
-        padding: 20px;
+        padding: 5px 45px;
+        border-bottom: 1px solid #eee;
+
+        a:hover {
+            text-decoration: underline;
+        }
     }
+
+    .address {
+        background: url(<%= asset_path 'icon-marker-60.png' %>) no-repeat 15px;
+        background-size: 20px;
+    }
+
+    .website {
+        background: url(<%= asset_path 'icon-website-60.png' %>) no-repeat 15px;
+        background-size: 20px;
+    }
+
+    .phone {
+        background: url(<%= asset_path 'icon-phone-60.png' %>) no-repeat 15px;
+        background-size: 20px;
+    }
+
+    .email {
+        background: url(<%= asset_path 'icon-email-60.png' %>) no-repeat 15px;
+        background-size: 20px;
+    }
+
+    .hours {
+        background: url(<%= asset_path 'clock-icon-clear.png' %>) no-repeat 15px;
+        background-size: 20px;
+    }
+
+    // .description {
+    //     margin: 0;
+    //     padding: 20px;
+    //     border-bottom: 1px solid #eee;
+    // }
+
+    // .address {
+    //     margin: 0;
+    //     padding: 20px;
+    // }
 
     ul {
         display: block;
