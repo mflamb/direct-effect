@@ -46,6 +46,7 @@ class OrganizationsController < ApplicationController
       end
     else 
       @organization = Organization.find(params[:id])
+      @address = @organization.address
       @needs = @organization.needs.where('enabled = true').order(:item).includes(@category)
       @categories = []
 
