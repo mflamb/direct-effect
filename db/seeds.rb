@@ -1,6 +1,7 @@
 # Delete old seed data before re-seed
 Need.destroy_all
 Organization.destroy_all
+User.destroy_all
 
 # Admin.create(
 #   email: "testing@test.com",
