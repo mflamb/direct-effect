@@ -1,5 +1,51 @@
+<% if current_admin || current_user %>
 
+<p>
+  <strong>Name:</strong>
+  <%= @organization.name %>
+</p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @organization.description %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= link_to @organization.address,
+  "https://www.google.com/maps/dir/?api=1&destination=#{@organization.address.to_param}",
+  target: '_blank'
+  %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= link_to @organization.website.sub(/^https?\:\/\/(www.)?/, ''),
+  @organization.website,
+  target: '_blank' %>
+</p>
+
+<p>
+  <strong>Point of Contact:</strong>
+  <%= @organization.poc_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @organization.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @organization.phone %>
+</p>
+
+<p>
+  <strong>Dropoff Hours:</strong>
+  <%= @organization.dropoff_hours %>
+</p>  
+
+<% else %>
 
 <div class="description"><%= @organization.description %></div>
 
@@ -35,6 +81,7 @@
     <%= @organization.dropoff_hours %>
   </div>
 <% end %>
+<% end %>
 
 <% if current_admin || current_user %>
 
@@ -52,9 +99,9 @@
 <div class="needs-list">
   <% @categories.each do |category| %>
     <h3 class="category"><%= category %></h3>
-    <div class="category">
+    <div class="needs-list row">
       <% Need.where(organization_id: @organization.id, category: category).each do |need| %>
-        <div id="need-btn-<%= need.id %>" class="col-xs-12 col-md-6">
+        <div id="need-btn-<%= need.id %>" class="col-xs-12 col-md-6">         
           <% if need.enabled? %>
             <% url = need_disable_path(need) %>
             <% style = 'success' %>
@@ -69,7 +116,7 @@
             <%= link_to edit_need_path(need),
               title: 'Add/edit comment',
               class: 'edit-need-link' do %>
-              <%= open_iconic :icon, :wrench %>
+              <%= open_iconic :icon, :comment_square %>
             <% end %>
           <% end %>
         </div>
