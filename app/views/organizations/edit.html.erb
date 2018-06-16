@@ -1,9 +1,8 @@
-<h1>Editing Organization</h1>
+<h1>Edit <%= @organization.name %>'s Details</h1>
 
 <%= render 'form', organization: @organization %>
 
-<%= link_to 'Show', @organization %> |
-<%= link_to 'Back', organizations_path %>
+<%= link_to "Back to #{@organization.name}'s Profile", organization_path %>
 <% if current_user || current_admin %>
 | <%= link_to 'Add or Edit Needs', needs_path %>
 <% end %>

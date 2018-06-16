@@ -4,37 +4,68 @@
 
   <% if current_admin %>
   <h3>Registered Users</h3>
-  <table>
+  <div class="table-responsive-sm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><strong>Organization</strong></th>
+        <th scope="col"><strong>Name</strong></th>
+        <th scope="col"><strong>Email</strong></th>
+        <th scope="col"><strong>Approved</strong></th>
+        <th scope="col"><strong>Approve User</strong></th>
+      </tr>
+    </thead>
+  <tbody>      
   <% @users.each do |user| %>
     <tr>
-      <td><strong>Name: </strong><%= user.first_name %> <%= user.last_name %></td>
-      <td><strong>Email: </strong><%= user.email %></td>
-      <td><strong>Approved: </strong><%= user.approved %></td>
+      <td><%= Organization.find(user.organization_id).name %></td>
+      <td><%= user.first_name %> <%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.approved %></td>
       <td><%= link_to "approve", approve_user_path(user.id), method: :put %> </td>
     </tr>
   <% end %>
-  </table><br>
+  </tbody>
+  </table>
+  </div>
+  <br>
   <% end %>
 
+<h3>All Organizations</h3>
+<div class="table-responsive-sm">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"><strong>Name</strong></th>
+        <th scope="col"><strong>Address</strong></th>
+        <th scope="col"><strong>Point of Contact</strong></th>
+        <th scope="col"><strong>Phone</strong></th>
+        <% if current_admin %>
+        <th scope="col"><strong>Manage Organization</strong></th>
+        <% end %>
+      </tr>
+    </thead>
+        
   <tbody>
     <% @organizations.each do |organization| %>
-    <div>
+    <%# <div> %>
       <tr>
         <td><%= organization.name %></td>
-        <td><%= organization.description %></td>
         <td><%= organization.address %></td>
         <td><%= organization.poc_name %></td>
         <td><%= organization.phone %></td>
         <% if current_admin %>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', organization %> | 
+        <%= link_to 'Edit', edit_organization_path(organization) %> |
+        <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    </div><br>
+    <%# </div> %>
+    <br>
     <% end %>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
