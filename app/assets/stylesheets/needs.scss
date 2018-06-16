@@ -1,8 +1,17 @@
+
 .needs-list {
     form {
       display: inline-block;
     }
   }
+
+  .comment {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    background-color: #d8f0f8;
+}
+
   
   .edit-need-link {
     display: inline-block;
