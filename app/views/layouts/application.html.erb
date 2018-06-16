@@ -18,12 +18,11 @@
       <div class="navbar navbar-collapse">
         <ul class="navbar-nav mr-auto">
 
+          <% if !current_user && !current_admin %>
 
           <li class="navbar-item">
            <%= link_to 'Map', unauthenticated_root_path, class: 'nav-link' %>
           </li>
-
-          <% if !current_user && !current_admin %>
 
           <li class="navbar-item">
             <%= link_to 'Create Account', users_sign_up_path, class: 'nav-link' %>
